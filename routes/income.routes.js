@@ -6,7 +6,6 @@ const { check } = require("express-validator")
 
 
 // crear ingreso
-
 router.post('/',auth,
             [
                 check('incomeAmount', "Introduce el monto de tus ingresos").not().isEmpty(),
@@ -16,4 +15,10 @@ router.post('/',auth,
     incomeController.crearIngreso
 )
             
+
+// mostrar todos los ingresos
+router.get('/',auth, incomeController.mostrarIngresos)
+
+
+
 module.exports = router;

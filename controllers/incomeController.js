@@ -8,7 +8,7 @@ exports.crearIngreso = async (req, res) => {
         const ingreso = new IncomeItem(req.body)
 
         // Guardar el creador via JWT
-        ingreso.creador = req.usuario.id 
+        ingreso.incomeOwner = req.usuario.id 
 
         // Guardar el ingreso
         ingreso.save()
@@ -18,5 +18,15 @@ exports.crearIngreso = async (req, res) => {
         console.log(error)
         res.status(500).send("Hubo un error")
     }
+}
 
+exports.mostrarIngresos = async (req,res) => {
+    try{
+        const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).sort({incomeAmount:-1}) 
+        res.json({ingresos})
+
+    } catch(error){
+        console.log(error)
+        res.status(500).send("Hubo un error obteniendo los ingresos")
+    }
 }
