@@ -71,3 +71,4 @@ exports.crearUsuario = async (req, res) => {
         res.status(400).send("Hubo un error") 
     }
 }
+

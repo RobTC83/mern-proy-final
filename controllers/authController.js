@@ -68,3 +68,4 @@ exports.usuarioAutenticado = async (req, res) => {
         res.status(500).json({msg: "Hubo un error"})
     }
 }
+

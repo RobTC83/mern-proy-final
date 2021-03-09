@@ -27,6 +27,7 @@ app.use('/usuarios', require('./routes/users.routes.js'))
 app.use('/auth', require('./routes/auth'))
 app.use('/proyectos', require('./routes/proyectos'))
 app.use('/ingresos', require('./routes/income.routes'))
+app.use('/presupuestos', require('./routes/budget.routes.js'))
 
 // DEFINIR LA PÁGINA PRINCIPAL
 app.get('/', (req,res) => {

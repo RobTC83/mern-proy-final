@@ -16,14 +16,14 @@ router.post('/',auth,
 )
             
 
-// mostrar todos los ingresos
+// mostrar todos los ingresos del usuario actual
 router.get('/',auth, incomeController.mostrarIngresos)
 
 // eliminar un ingreso dado de alta
-
 router.delete('/:id',
     auth,
     incomeController.eliminarIngreso 
 )
 
-module.exports = router;
+
+ module.exports = router;
