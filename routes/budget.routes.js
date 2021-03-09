@@ -16,9 +16,12 @@ router.post('/',auth,
 // mostrar presupuesto
 router.get('/',auth, budgetController.mostrarPresupuesto)
 
-
 // mostrar el total presupuestado
+router.get('/total',auth, budgetController.totalPresupuestado)
+
+// editar partidas
 
 // eliminar partidas
+router.delete('/:id',auth, budgetController.eliminarPresupuesto)
 
 module.exports = router;

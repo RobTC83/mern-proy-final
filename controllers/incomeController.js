@@ -34,8 +34,7 @@ exports.mostrarIngresos = async (req,res) => {
     }
 }
 
-
-
+// eliminar un ingreso
 exports.eliminarIngreso = async (req,res) => {
     try {
         // obtener el id
@@ -61,14 +60,13 @@ exports.eliminarIngreso = async (req,res) => {
 }
 
 //Sumar los ingresos del usuario
-
 exports.totalIngresos = async (req,res)=> {
     try{
         const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).sort({incomeAmount:-1})
         //res.json({ingresos})
 
         const soloIngresos = ingresos.map((element)=>{
-            return((element.incomeAmount))
+            return(element.incomeAmount)
         })
 
         const sumaIngresos = soloIngresos.reduce((a,b)=>{
