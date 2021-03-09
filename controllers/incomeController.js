@@ -22,7 +22,7 @@ exports.crearIngreso = async (req, res) => {
 // Mostrar los ingresos del usuario
 exports.mostrarIngresos = async (req,res) => {
     try{
-        const campos = {}
+        
         const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).populate('incomeOwner')/*.select('ingresos.incomeOwner.username')*/.sort({incomeAmount:-1})
         res.json({ingresos})
 
@@ -34,9 +34,7 @@ exports.mostrarIngresos = async (req,res) => {
     }
 }
 
-//Sumar los ingresos del usuario
 
-//exports.sumarIngresos 
 
 exports.eliminarIngreso = async (req,res) => {
     try {
@@ -62,3 +60,26 @@ exports.eliminarIngreso = async (req,res) => {
     }
 }
 
+//Sumar los ingresos del usuario
+
+exports.totalIngresos = async (req,res)=> {
+    try{
+        const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).sort({incomeAmount:-1})
+        //res.json({ingresos})
+
+        const soloIngresos = ingresos.map((element)=>{
+            return((element.incomeAmount))
+        })
+
+        const sumaIngresos = soloIngresos.reduce((a,b)=>{
+            return(a+b)
+        })
+        console.log(sumaIngresos)
+        res.json({sumaIngresos: sumaIngresos})
+
+    } catch(error){
+        console.log(error)
+        res.status(500).send("Hubo un error obteniendo el total de ingresos")
+    }
+
+}

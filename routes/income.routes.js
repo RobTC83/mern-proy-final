@@ -25,5 +25,8 @@ router.delete('/:id',
     incomeController.eliminarIngreso 
 )
 
+// sumar los ingresos del usuario
+router.get('/total',auth,incomeController.totalIngresos)
+
 
  module.exports = router;
