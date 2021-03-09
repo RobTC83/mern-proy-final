@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 
-const UsuariosSchema = mongoose.Schema({
-    nombre: {
+const UsersSchema = mongoose.Schema({
+    username: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        unique: true
     },
     email: {
         type: String,
@@ -17,10 +18,14 @@ const UsuariosSchema = mongoose.Schema({
         required: true,
         trime: true
     },
-    registro: {
-        type: Date,
-        default: Date.now()
-    }
-})
+    profilePictureUrl: String,
+    // incomeItem: [{ type: Schema.Types.ObjectId, ref: 'IncomeItem' }],
+    // budgetItem: [{ type: Schema.Types.ObjectId, ref: 'BudgetItem' }]
 
-module.exports = mongoose.model('Usuario', UsuariosSchema)
+},
+{
+    timestamps:true
+}
+);
+
+module.exports = mongoose.model('Users', UsersSchema)
