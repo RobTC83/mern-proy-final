@@ -6,7 +6,6 @@ const {check} = require('express-validator')
 
 
 // crear un budget
-
 router.post('/',auth,
         [
             check('budgetConcept','Introduce un concepto').not().isEmpty(),
@@ -14,9 +13,8 @@ router.post('/',auth,
         ],
     budgetController.crearPresupuesto)
 
-
-// mostrar partidas
-
+// mostrar presupuesto
+router.get('/',auth, budgetController.mostrarPresupuesto)
 
 
 // mostrar el total presupuestado
