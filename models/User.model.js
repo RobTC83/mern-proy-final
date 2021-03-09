@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const Schema = mongoose.Schema
 
 const UsersSchema = mongoose.Schema({
     username: {
@@ -19,7 +20,7 @@ const UsersSchema = mongoose.Schema({
         trime: true
     },
     profilePictureUrl: String,
-    // incomeItem: [{ type: Schema.Types.ObjectId, ref: 'IncomeItem' }],
+    incomeItem: [{ type: Schema.Types.ObjectId, ref: 'IncomeItem' }],
     // budgetItem: [{ type: Schema.Types.ObjectId, ref: 'BudgetItem' }]
 
 },

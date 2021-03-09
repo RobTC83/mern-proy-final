@@ -2,7 +2,6 @@ const express = require('express')
 const conectarDB = require('./config/db')
 const cors = require("cors") // EL CORS ES UNA LIBRERÍA QUE ME PERMITE GESTIONAR DE MEJOR FORMA LOS ACCESOS ENTRE APLICACIONES. (frontend <> backend)
 
-const userRoutes = require('./routes/usuarios')
 
 // CREAR SERVIDOR
 const app = express()
@@ -24,9 +23,10 @@ const PORT = process.env.PORT || 4000
 
 // RUTEO
 // Importar rutas
-app.use('/api/usuarios', require('./routes/usuarios'))
-app.use('/api/auth', require('./routes/auth'))
-app.use('/api/proyectos', require('./routes/proyectos'))
+app.use('/usuarios', require('./routes/users.routes.js'))
+app.use('/auth', require('./routes/auth'))
+app.use('/proyectos', require('./routes/proyectos'))
+app.use('/ingresos', require('./routes/income.routes'))
 
 // DEFINIR LA PÁGINA PRINCIPAL
 app.get('/', (req,res) => {
