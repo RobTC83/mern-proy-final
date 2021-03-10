@@ -17,4 +17,15 @@ router.post('/',auth,
     expenseController.crearGasto
 )
 
+
+// mostrar todos los gastos
+router.get('/',auth, expenseController.mostrarGastos
+)
+
+// eliminar un gasto
+router.delete('/:id',auth, expenseController.eliminarGasto)
+
+// obtener la suma de los gastos
+router.get('/total',auth, expenseController.totalGastos)
+
 module.exports = router
