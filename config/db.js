@@ -1,7 +1,7 @@
 // ES LA CONEXIÓN DE LA BASE DE DATOS
 const mongoose = require('mongoose')
 require('dotenv').config(
-    {path: 'variables.env'}
+    {path: '.env'}
 )
 
 const conectarDB = async () => {

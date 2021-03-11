@@ -18,10 +18,14 @@ router.post('/',
     usuarioController.crearUsuario
 )
 
-router.get("/mike", (req, res) => {
-    res.json({
-        msg: "hola"
-    })
-})
+// editar perfil
+// '/:id/editar-perfil
+
+// cerrar sesión
+
+
+// ir a gráficas
+
+
 
 module.exports = router

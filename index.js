@@ -1,7 +1,7 @@
 const express = require('express')
 const conectarDB = require('./config/db')
-const cors = require("cors") // EL CORS ES UNA LIBRERÍA QUE ME PERMITE GESTIONAR DE MEJOR FORMA LOS ACCESOS ENTRE APLICACIONES. (frontend <> backend)
 
+const cors = require('cors');
 
 // CREAR SERVIDOR
 const app = express()
@@ -12,14 +12,21 @@ conectarDB()
 
 // MIDDLEWARES
 // Habilitar CORS
-app.use(cors())
+
+app.use(cors({
+    credentials: true,
+    "Access-Control-Allow-Credentials": true,
+    methods: ['GET','PUT','POST','DELETE','PATCH','OPTIONS'],
+    origin: ["http://localhost:3003"]
+  }));
+
 
 // Habilitar express.json. Permitir datos que el usuario envíe.
 // ESTA ES LA LIBRERÍA IGUAL A BODYPARSER
 app.use(express.json({extended:true}))
 
 // PUERTO DE LA APP
-const PORT = process.env.PORT || 4000
+const PORT = process.env.PORT || 4010
 
 // RUTEO
 // Importar rutas
