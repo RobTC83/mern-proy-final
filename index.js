@@ -17,7 +17,7 @@ app.use(cors({
     credentials: true,
     "Access-Control-Allow-Credentials": true,
     methods: ['GET','PUT','POST','DELETE','PATCH','OPTIONS'],
-    origin: ["http://localhost:3003"]
+    origin: ["http://localhost:3000"]
   }));
 
 
@@ -26,7 +26,7 @@ app.use(cors({
 app.use(express.json({extended:true}))
 
 // PUERTO DE LA APP
-const PORT = process.env.PORT || 4010
+const PORT = process.env.PORT || 4000
 
 // RUTEO
 // Importar rutas
