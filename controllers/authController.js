@@ -40,13 +40,12 @@ exports.autenticarUsuario = async (req,res) => {
         }
 
         jwt.sign(payload, process.env.SECRETA, {
-            expiresIn: 3600
+            expiresIn: 36000
         }, (error, token) => {
             if(error) throw error;
 
             // MENSAJE DE CONFIRMACIÓN
-            console.log(token)
-            res.json({usuario})
+            res.json({token})
         })
 
 

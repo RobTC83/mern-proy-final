@@ -7,7 +7,7 @@ const authController = require('../controllers/authController')
 const auth = require('../middleware/auth')
 
 // Iniciar sesión
-// api/auth
+// /auth 1
 router.post('/', 
         [
             check("email", "Agrega un email válido").isEmail(),
@@ -16,6 +16,8 @@ router.post('/',
         authController.autenticarUsuario
     )
 
+
+// api/auth 2
 router.get('/', 
         auth,
         authController.usuarioAutenticado
