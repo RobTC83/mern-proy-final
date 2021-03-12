@@ -25,6 +25,9 @@ const UsersSchema = mongoose.Schema({
     },
     budgetInfo: {
         type: Array
+    },
+    expenseInfo: {
+        type: Array
     }
 
 },

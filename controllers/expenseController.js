@@ -1,12 +1,17 @@
 const ExpenseItem = require('../models/ExpenseItem.model')
 const {validationResult} = require('express-validator')
+const Users = require ('../models/User.model.js')
 
 exports.crearGasto = async (req,res) => {
     try{
         const gasto = new ExpenseItem(req.body)
-        gasto.incomeOwner = req.usuario.id
+        gasto.expenseOwner = req.usuario.id
         gasto.save()
-        res.json(gasto)
+
+        const id = req.usuario.id
+        const agregarGasto = await Users.findByIdAndUpdate(id,{$push:{expenseInfo: gasto}},{new:true})
+        console.log(agregarGasto)
+        res.json(agregarGasto)
 
     } catch(error){
         console.log(error)
@@ -42,8 +47,12 @@ exports.eliminarGasto = async (req,res)=> {
 
 exports.totalGastos = async (req,res)=> {
     try{
-        const gastos = await ExpenseItem.find({incomeOwner: req.usuario.id}).sort({expenseAmount:-1})
+        const id = req.usuario.id
+        const gastos = await ExpenseItem.find({expenseOwner: id}).sort({expenseAmount:-1})
+            console.log("req.usuario.id:", req.usuario.id)
         const soloGastos = gastos.map((element)=>{
+            console.log("Solo gastos:", soloGastos)
+
                 return(element.expenseAmount)
         })
         const sumaGastos = soloGastos.reduce((a,b)=>{

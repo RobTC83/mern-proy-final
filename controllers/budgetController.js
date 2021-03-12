@@ -1,5 +1,6 @@
 const BudgetItem = require('../models/BudgetItem.model')
 const {validationResult} = require('express-validator')
+const Users = require('../models/User.model')
 
 // crear presupuesto
 exports.crearPresupuesto = async (req,res) => {
@@ -12,7 +13,16 @@ exports.crearPresupuesto = async (req,res) => {
 
         // Guardar el presupuesto
         presupuesto.save()
-        res.json(presupuesto)
+
+
+        // inyectar este ingreso al usuario
+         console.log("presupuesto es:", presupuesto)
+        
+         const id = req.usuario.id
+         console.log("id",id)
+         const agregarPresupuesto = await Users.findByIdAndUpdate(id,{$push: {expenseInfo: presupuesto}},{new:true})
+         res.json(agregarPresupuesto)
+
 
     } catch(error){
         console.log(error)
