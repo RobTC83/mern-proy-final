@@ -20,7 +20,7 @@ exports.crearPresupuesto = async (req,res) => {
         
          const id = req.usuario.id
          console.log("id",id)
-         const agregarPresupuesto = await Users.findByIdAndUpdate(id,{$push: {expenseInfo: presupuesto}},{new:true})
+         const agregarPresupuesto = await Users.findByIdAndUpdate(id,{$push: {budgetInfo: presupuesto}},{new:true})
          res.json(agregarPresupuesto)
 
 
