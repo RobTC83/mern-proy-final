@@ -1,4 +1,4 @@
-const Usuario = require('../models/User.model')
+const Users = require('../models/User.model')
 const bcryptjs = require('bcryptjs')
 const { validationResult } = require('express-validator')
 const jwt = require("jsonwebtoken")
@@ -19,7 +19,7 @@ exports.crearUsuario = async (req, res) => {
 
     try {
         // Revisar que el usuario registrado sea único
-        let usuario = await Usuario.findOne({email})
+        let usuario = await Users.findOne({email})
         
 
         if(usuario){
@@ -27,7 +27,7 @@ exports.crearUsuario = async (req, res) => {
         }
 
         // guardar el nuevo usuario
-        usuario = new Usuario(req.body)
+        usuario = new Users(req.body)
         console.log("Linea 33:", usuario)
 
         // Hashear el password
@@ -65,10 +65,24 @@ exports.crearUsuario = async (req, res) => {
             ) 
         })
 
-
     } catch(error){
         console.log(error)
         res.status(400).send("Hubo un error") 
+    }
+}
+
+exports.consultarUsuario = async (req,res) => {
+    try{
+        const id = req.usuario.id
+        console.log(id)
+
+        const infoUsuario = await Users.findById(id)
+        console.log(infoUsuario)
+        res.json({infoUsuario})
+        
+    } catch(error){
+        console.log(error)
+        res.status(500).send("Hubo un error intentando consultar la info de este usuario")
     }
 }
 

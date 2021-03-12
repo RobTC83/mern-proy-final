@@ -5,7 +5,7 @@ const router = express.Router()
 const {check} = require('express-validator')
 
 const usuarioController = require('../controllers/user.controller')
-
+const auth = require('../middleware/auth')
 
 // CREA UN USUARIO
 // api/usuarios
@@ -17,6 +17,10 @@ router.post('/',
     ], 
     usuarioController.crearUsuario
 )
+
+// consultar un usuario
+
+router.get('/',auth, usuarioController.consultarUsuario)
 
 // editar perfil
 // '/:id/editar-perfil

@@ -1,4 +1,5 @@
 const IncomeItem = require('../models/IncomeItem.model')
+const Users = require('../models/User.model')
 const { validationResult } = require('express-validator')
 
 exports.crearIngreso = async (req, res) => {
@@ -8,11 +9,20 @@ exports.crearIngreso = async (req, res) => {
         const ingreso = new IncomeItem(req.body)
 
         // Guardar el creador via JWT
+        console.log("req.usuario.id:",req.usuario.id)
         ingreso.incomeOwner = req.usuario.id 
 
         // Guardar el ingreso
         ingreso.save()
-        res.json(ingreso)
+
+        // inyectar este ingreso al usuario
+        console.log("ingreso es:", ingreso)
+        
+        const id = req.usuario.id
+        console.log("id",id)
+        const agregarIngreso = await Users.findByIdAndUpdate(id,{$push: {incomeInfo: ingreso}},{new:true})
+        res.json(agregarIngreso)
+        
 
     } catch(error){
         console.log(error)
@@ -25,8 +35,6 @@ exports.mostrarIngresos = async (req,res) => {
         
         const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).populate('incomeOwner')/*.select('ingresos.incomeOwner.username')*/.sort({incomeAmount:-1})
         res.json({ingresos})
-
-
 
     } catch(error){
         console.log(error)
