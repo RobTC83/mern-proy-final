@@ -77,7 +77,6 @@ exports.consultarUsuario = async (req,res) => {
         console.log(id)
 
         const infoUsuario = await Users.findById(id)
-        console.log(infoUsuario)
         res.json({infoUsuario})
         
     } catch(error){

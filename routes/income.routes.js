@@ -25,6 +25,11 @@ router.delete('/:id',
     incomeController.eliminarIngreso 
 )
 
+// editar un ingreso dado de alta
+router.patch('/:id',
+    auth,
+    incomeController.editarIngreso)
+
 // sumar los ingresos del usuario
 router.get('/total',auth,incomeController.totalIngresos)
 

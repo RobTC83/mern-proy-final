@@ -48,11 +48,11 @@ exports.eliminarIngreso = async (req,res) => {
         // obtener el id
         let ingreso = await IncomeItem.findById(req.params.id)
 
-        // si el proyecto existe,
+        // si el elemento existe,
         if(!ingreso) {
             return res.status(400).json({msg: "Ingreso no encontrado"})
         }
-        console.log("Esto es req.usuario.id",req.usuario.id )
+        // console.log("Esto es req.usuario.id",req.usuario.id )
         // verificar al dueño de ese ingreso
         if(ingreso.incomeOwner.toString() !== req.usuario.id) {
             return res.status(401).json({msg: "Usuario-Ingreso no encontrado"})
@@ -70,9 +70,30 @@ exports.eliminarIngreso = async (req,res) => {
         console.log(error)
         res.status(500).send("Error en el servidor")
     }
-
-
         
+}
+
+// editar un ingreso dado de alta
+
+
+exports.editarIngreso = async (req,res)=> {
+    
+
+    try{
+        // obtener el elemento
+        let id = await IncomeItem.findById(req.params.id)
+
+        console.log("el id es",id)
+        const {incomeAmount, incomeSource, incomeDate} = req.body
+    
+        let editarIngreso = await IncomeItem.findByIdAndUpdate(id,{incomeAmount, incomeSource, incomeDate},{new:true})
+        res.json({editarIngreso})
+
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).send("Hubo un error editando el elemento")
+    }
 }
 
 //Sumar los ingresos del usuario
@@ -88,7 +109,6 @@ exports.totalIngresos = async (req,res)=> {
         const sumaIngresos = soloIngresos.reduce((a,b)=>{
             return(a+b)
         })
-        console.log(sumaIngresos)
         res.json({sumaIngresos: sumaIngresos})
 
     } catch(error){
