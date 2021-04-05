@@ -20,15 +20,9 @@ const UsersSchema = mongoose.Schema({
         trime: true
     },
     profilePictureUrl: String,
-    incomeInfo: {
-        type: Array
-    },
-    budgetInfo: {
-        type: Array
-    },
-    expenseInfo: {
-        type: Array
-    }
+    
+    incomeItem: [{ type: Schema.Types.ObjectId, ref: 'IncomeItem' }],
+    budgetItem: [{ type: Schema.Types.ObjectId, ref: 'BudgetItem' }]
 
 },
 {

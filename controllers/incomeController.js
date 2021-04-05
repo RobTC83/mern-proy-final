@@ -15,13 +15,13 @@ exports.crearIngreso = async (req, res) => {
         // Guardar el ingreso
         ingreso.save()
 
-        // inyectar este ingreso al usuario
-        console.log("ingreso es:", ingreso)
+        // // inyectar este ingreso al usuario
+        // console.log("ingreso es:", ingreso)
         
-        const id = req.usuario.id
-        console.log("id",id)
-        const agregarIngreso = await Users.findByIdAndUpdate(id,{$push: {incomeInfo: ingreso}},{new:true})
-        res.json(agregarIngreso)
+        // const id = req.usuario.id
+        // console.log("id",id)
+        // const agregarIngreso = await Users.findByIdAndUpdate(id,{$push: {incomeInfo: ingreso}},{new:true})
+        // res.json(agregarIngreso)
         
 
     } catch(error){
@@ -33,7 +33,7 @@ exports.crearIngreso = async (req, res) => {
 exports.mostrarIngresos = async (req,res) => {
     try{
         
-        const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).populate('incomeOwner')/*.select('ingresos.incomeOwner.username')*/.sort({incomeAmount:-1})
+        const ingresos = await IncomeItem.find({incomeOwner: req.usuario.id}).populate('incomeOwner').sort({incomeAmount:-1})
         res.json({ingresos})
 
     } catch(error){
@@ -57,14 +57,22 @@ exports.eliminarIngreso = async (req,res) => {
         if(ingreso.incomeOwner.toString() !== req.usuario.id) {
             return res.status(401).json({msg: "Usuario-Ingreso no encontrado"})
         }
+
         // eliminar el elemento
         await IncomeItem.findOneAndRemove({_id: req.params.id})
+        // await Users.findByIdAndDelete({_id: req.params.id})
+        console.log("eliminar",req.usuario)
         res.json({msg:"Ingreso eliminado"})
+         
+
     
     } catch(error) {
         console.log(error)
         res.status(500).send("Error en el servidor")
     }
+
+
+        
 }
 
 //Sumar los ingresos del usuario
