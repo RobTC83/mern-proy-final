@@ -26,7 +26,7 @@ router.delete('/:id',
 )
 
 // editar un ingreso dado de alta
-router.patch('/:id',
+router.post('/editar/:id',
     auth,
     incomeController.editarIngreso)
 

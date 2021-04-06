@@ -60,7 +60,7 @@ exports.eliminarIngreso = async (req,res) => {
 
         // eliminar el elemento
         await IncomeItem.findOneAndRemove({_id: req.params.id})
-        // await Users.findByIdAndDelete({_id: req.params.id})
+
         console.log("eliminar",req.usuario)
         res.json({msg:"Ingreso eliminado"})
          

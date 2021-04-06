@@ -45,6 +45,7 @@ exports.mostrarPresupuesto = async (req,res) =>{
 exports.totalPresupuestado = async (req,res) => {
     try{
         const presupuestos = await BudgetItem.find({budgetOwner: req.usuario.id}).sort({budgetAmount:-1})
+        console.log("respuesta total presupuestos",presupuestos)
         const soloPresupuestos = presupuestos.map((elemento)=>{
             return(elemento.budgetAmount)
         })
