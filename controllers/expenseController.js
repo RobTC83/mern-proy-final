@@ -6,17 +6,11 @@ exports.crearGasto = async (req,res) => {
     try{
 
         const gasto = new ExpenseItem(req.body)
-        console.log("el req.body es:",req.body)
-        console.log("el req.usuario.id es:",req.usuario.id)
-
+        
         gasto.expenseOwner = req.usuario.id 
         gasto.save()
         res.json(gasto)
 
-        // const id = req.usuario.id
-        // const agregarGasto = await Users.findByIdAndUpdate(id,{$push:{expenseInfo: gasto}},{new:true})
-        // console.log(agregarGasto)
-        // res.json(agregarGasto)
 
     } catch(error){
         console.log(error)
@@ -59,7 +53,7 @@ exports.totalGastos = async (req,res)=> {
 
                 return(element.expenseAmount)
         })
-        console.log("solo gastos:",soloGastos)
+        // console.log("solo gastos:",soloGastos)
         const sumaGastos = soloGastos.reduce((a,b)=>{
                 return(a+b)
         })
