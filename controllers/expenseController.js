@@ -47,7 +47,9 @@ exports.eliminarGasto = async (req,res)=> {
 exports.totalGastos = async (req,res)=> {
     try{
         const id = req.usuario.id
+        
         const gastos = await ExpenseItem.find({expenseOwner: id}).sort({expenseAmount:-1})
+
             console.log("gastos:", gastos)
         const soloGastos = gastos.map((element)=>{
 
