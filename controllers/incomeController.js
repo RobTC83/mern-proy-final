@@ -14,6 +14,8 @@ exports.crearIngreso = async (req, res) => {
 
         // Guardar el ingreso
         ingreso.save()
+        res.json({ingresos: ingreso})
+
 
         // // inyectar este ingreso al usuario
         // console.log("ingreso es:", ingreso)
@@ -26,7 +28,7 @@ exports.crearIngreso = async (req, res) => {
 
     } catch(error){
         console.log(error)
-        res.status(500).send("Hubo un error")
+        res.status(500).send("Hubo un error registrando el ingreso")
     }
 }
 // Mostrar los ingresos del usuario

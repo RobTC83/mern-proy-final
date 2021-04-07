@@ -16,10 +16,10 @@ exports.crearPresupuesto = async (req,res) => {
 
 
         // inyectar este ingreso al usuario
-         console.log("presupuesto es:", presupuesto)
+        //  console.log("presupuesto es:", presupuesto)
         
          const id = req.usuario.id
-         console.log("id",id)
+        //  console.log("id",id)
          const agregarPresupuesto = await Users.findByIdAndUpdate(id,{$push: {budgetInfo: presupuesto}},{new:true})
          res.json(agregarPresupuesto)
 
@@ -45,14 +45,14 @@ exports.mostrarPresupuesto = async (req,res) =>{
 exports.totalPresupuestado = async (req,res) => {
     try{
         const presupuestos = await BudgetItem.find({budgetOwner: req.usuario.id}).sort({budgetAmount:-1})
-        console.log("respuesta total presupuestos",presupuestos)
+        // console.log("respuesta total presupuestos",presupuestos)
         const soloPresupuestos = presupuestos.map((elemento)=>{
             return(elemento.budgetAmount)
         })
         const sumaPresupuestos = soloPresupuestos.reduce((a,b)=>{
             return(a+b)
         })
-        console.log(sumaPresupuestos)
+        // console.log(sumaPresupuestos)
         res.json({sumaPresupuestos: sumaPresupuestos})
 
     } catch(error){

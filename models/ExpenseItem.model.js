@@ -3,11 +3,11 @@ const Schema = mongoose.Schema
 
 const ExpenseSchema = new Schema (
     {
+        expenseOwner: {type: Schema.Types.ObjectId,ref:'Users'},
         expenseAmount: Number,
         expenseConcept: String,
         expenseDate: Date,
-        relatedBudget: String,
-        relatedBudgetId: {type: Schema.Types.ObjectId,ref:'BudgetItem'}
+        relatedBudget: String
         
         
         

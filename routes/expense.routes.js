@@ -12,7 +12,7 @@ router.post('/',auth,
             check('expenseAmount','Ingresa la cantidad').not().isEmpty(),
             check('expenseConcept','Ingresa el concepto de tu gasto').not().isEmpty(),
             check('expenseDate','Ingresa la fecha de tu gasto').not().isEmpty(),
-
+            check('relatedBudget','Ingresa el presupuesto asociado').not().isEmpty()
         ],
     expenseController.crearGasto
 )
