@@ -28,8 +28,8 @@ exports.crearGasto = async (req,res) => {
 exports.mostrarGastos = async (req,res) => {
     try{
         console.log("este es el req.usuario.id",req.usuario.id)
-        const gastos = await ExpenseItem.find({incomeOwner: req.usuario.id}).populate('incomeOwner').sort({expenseAmount:-1})
-        res.json({gastos})
+        const gastos = await ExpenseItem.find({expenseOwner: req.usuario.id}).populate('incomeOwner').sort({expenseAmount:-1})
+        res.json(gastos)
 
     } catch(error){
         console.log(error)
