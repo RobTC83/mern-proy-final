@@ -74,7 +74,7 @@ exports.crearUsuario = async (req, res) => {
 exports.consultarUsuario = async (req,res) => {
     try{
         const id = req.usuario.id
-        console.log(id)
+        // console.log(id)
 
         const infoUsuario = await Users.findById(id)
         res.json({infoUsuario})
@@ -85,3 +85,24 @@ exports.consultarUsuario = async (req,res) => {
     }
 }
 
+// editar un usuario dado de alta
+
+
+exports.editarUsuario = async (req,res)=> {
+
+    try{
+        // obtener el elemento
+        let id = await Users.findById(req.params.id)
+
+        console.log("el id es",id)
+        const {username, email} = req.body
+    
+        let editarUsuario = await Users.findByIdAndUpdate(id,{username, email},{new:true})
+        res.json({editarUsuario})
+
+    }
+    catch(error){
+        console.log(error)
+        res.status(500).send("Hubo un error editando el usuario")
+    }
+}

@@ -22,13 +22,13 @@ router.post('/',
 
 router.get('/',auth, usuarioController.consultarUsuario)
 
-// editar perfil
-// '/:id/editar-perfil
+// editar un usuario dado de alta
+router.post('/editar/:id',
+    auth,
+    usuarioController.editarUsuario)
 
-// cerrar sesión
 
 
-// ir a gráficas
 
 
 

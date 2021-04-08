@@ -15,15 +15,6 @@ exports.crearIngreso = async (req, res) => {
         // Guardar el ingreso
         ingreso.save()
         res.json({ingresos: ingreso})
-
-
-        // // inyectar este ingreso al usuario
-        // console.log("ingreso es:", ingreso)
-        
-        // const id = req.usuario.id
-        // console.log("id",id)
-        // const agregarIngreso = await Users.findByIdAndUpdate(id,{$push: {incomeInfo: ingreso}},{new:true})
-        // res.json(agregarIngreso)
         
 
     } catch(error){
